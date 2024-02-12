@@ -18,7 +18,7 @@ const protect = catchAsync(async (req, res, next) => {
   //verifying the token
   const decoded = await promisify(jwt.verify)(
     token,
-    "this-is-it-bro-we-must-work-hard"
+    "this-work-hard"
   );
 
   const { id, exp, iat } = decoded;

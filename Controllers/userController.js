@@ -10,7 +10,7 @@ exports.viewLoginPage = catchAsync(async (req, res, next) => {
 });
 
 exports.userActivation = catchAsync(async (req, res, next) => {
-  const { regno, email, password, passwordConfirm } = req.body;
+  const { regno, email, password} = req.body;
   const { user } = roleChecker(regno);
 
   if (!user) {
@@ -105,12 +105,11 @@ exports.changePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.messageSender = catchAsync(async (req, res, next) => {
-  // sending to self
+
   const user = req.user;
   user.messages.push(req.body);
   user.save({ validateBeforeSave: false });
 
-  // sending to admin
   const admin = await Lecturer.findOne({ courseCode: "GSS 1101" });
   admin.messages.push({
     message: req.body.message,
